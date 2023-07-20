@@ -1,6 +1,6 @@
 package com.mattpus.expensetracker.service;
 
-import com.mattpus.expensetracker.exceptions.ExpenseNotFoundException;
+import com.mattpus.expensetracker.exceptions.ResourceNotFoundException;
 import com.mattpus.expensetracker.model.Expense;
 import com.mattpus.expensetracker.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         if (expense.isPresent()) {
             return expense.get();
         }
-        throw new ExpenseNotFoundException("Expense is not found for the id: " + id);
+        throw new ResourceNotFoundException("Expense is not found for the id: " + id);
     }
 
     @Override

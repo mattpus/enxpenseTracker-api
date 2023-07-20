@@ -1,10 +1,10 @@
 package com.mattpus.expensetracker.exceptions;
 
-public class ExpenseNotFoundException extends RuntimeException {
+public class ResourceNotFoundException  extends RuntimeException {
 
     private static final long serialVersion = 1L;
 
-    public ExpenseNotFoundException(String message) {
+    public ResourceNotFoundException(String message) {
         super(message);
     }
 }
