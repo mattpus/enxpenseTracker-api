@@ -12,4 +12,5 @@ public interface ExpenseService {
     Expense findById(Long id);
     void deleteById(Long id);
     Expense updateExpenseDetails(Long id, Expense expense);
+    List<Expense> readByCategory(String category, Pageable page);
 }

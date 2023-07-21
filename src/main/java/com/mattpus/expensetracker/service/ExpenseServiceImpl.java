@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,4 +51,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         existingExpense.setAmount(expense.getAmount() != null ? expense.getAmount() : existingExpense.getAmount());
         return expenseRepository.save(existingExpense);
     }
+
+    @Override
+    public List<Expense> readByCategory(String category, Pageable page) {
+        return expenseRepository.findByCategory(category, page).toList();
+    }
 }
+

@@ -1,8 +1,10 @@
 package com.mattpus.expensetracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -23,17 +25,20 @@ public class Expense {
     private Long id;
 
     @Column(name = "expense_name")
+    @NotBlank(message = "Expense name must not be null")
+    @Size(min = 3, message = "Expense name must have at least 3 characters")
     private String name;
-
 
     private String description;
 
     @Column(name = "expense_amount")
-//    @NotNull
+    @NotNull(message = "Expense amount should not be null")
     private BigDecimal amount;
 
+    @NotBlank(message = "Category should not be null")
     private String category;
 
+    @NotNull(message = "Date should not be null")
     private Date date;
 
     @Column(name = "created_at", nullable = false, updatable = false)
