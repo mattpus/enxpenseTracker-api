@@ -37,7 +37,7 @@ public class AuthController {
         authenticate(authModel.getEmail(), authModel.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authModel.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return new ResponseEntity<JwtResponse>(new JwtResponse(token), HttpStatus.OK);
+        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
     }
 
     private void authenticate(String email, String password) throws Exception {
@@ -52,6 +52,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> save(@Valid @RequestBody UserModel user) {
-        return new ResponseEntity<User>(userService.createUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 }
