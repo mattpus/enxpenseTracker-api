@@ -3,7 +3,6 @@ package com.mattpus.expensetracker.controller;
 import com.mattpus.expensetracker.model.Expense;
 import com.mattpus.expensetracker.service.ExpenseService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
     @GetMapping("expenses")
     public List<Expense> getAllExpenses(Pageable page) {

@@ -1,26 +1,36 @@
 package com.mattpus.expensetracker.controller;
 
+import com.mattpus.expensetracker.exceptions.ResourceNotFoundException;
 import com.mattpus.expensetracker.model.User;
 import com.mattpus.expensetracker.model.UserModel;
 import com.mattpus.expensetracker.service.UserService;
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
+
 @RestController
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @PostMapping("register")
-    public ResponseEntity<User> save(@Valid @RequestBody UserModel user) {
-        User createdUser = userService.createUser(user);
-        return new ResponseEntity<User>(createdUser, HttpStatus.CREATED);
+    @GetMapping("profile")
+    public ResponseEntity<User> get() {
+        return new ResponseEntity<>(userService.read(), HttpStatus.OK);
+    }
+
+    @PutMapping("profile")
+    public ResponseEntity<User> update(@RequestBody UserModel user) {
+        User updatedUser = userService.update(user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping("deactivate")
+    public ResponseEntity<HttpStatus> delete() throws ResourceNotFoundException {
+        userService.delete();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
+
